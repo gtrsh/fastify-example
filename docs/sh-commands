@@ -1,3 +1,6 @@
 # Create user and database
 sudo -u postgres createuser coub
 sudo -u postgres createdb coub-service-db -O coub
+
+# Parse .env file and start service
+node -r dotenv/config src/index.js
