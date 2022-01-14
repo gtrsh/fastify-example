@@ -1,0 +1,3 @@
+# Create user and database
+sudo -u postgres createuser coub
+sudo -u postgres createdb coub-service-db -O coub
