@@ -1,4 +1,4 @@
-import { client, storeConf } from './objectStore.js'
+import { client, storeConf } from './objectStore'
 
 export {
   client,

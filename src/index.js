@@ -1,4 +1,4 @@
-import { getMetaData } from './metadata.js'
+import { getMetaData } from './metadata'
 
 const data = await getMetaData('https://coub.com/view/2nmqv5')
 console.log(data.toString())
