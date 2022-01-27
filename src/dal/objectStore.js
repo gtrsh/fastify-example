@@ -7,7 +7,15 @@ const client = new Client({
   ...storeConf
 })
 
+const uploadFile = (...args) => new Promise((res, rej) => {
+  client.putObject(...args, (err, data) => {
+    if (err) return rej(err)
+    res(data)
+  })
+})
+
 export {
   storeConf,
+  uploadFile,
   client
 }
