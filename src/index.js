@@ -13,8 +13,9 @@ const { statusCodeAud, body: bodyStreamAud } = await request(audioUrl)
 
 import { uploadFile } from './dal'
 
-const objResVid = await uploadFile('coub-bucket', getFileName(videoUrl), bodyStreamVid, videoSize)
-const objResAud = await uploadFile('coub-bucket', getFileName(audioUrl), bodyStreamAud, audioSize)
+const result = await Promise.all([
+  uploadFile('coub-bucket', getFileName(videoUrl), bodyStreamVid, videoSize),
+  uploadFile('coub-bucket', getFileName(audioUrl), bodyStreamAud, audioSize)
+])
 
-console.log(objResVid)
-console.log(objResAud)
+console.log(result)
