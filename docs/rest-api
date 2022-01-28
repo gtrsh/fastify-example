@@ -1,0 +1,10 @@
+# API endpoints overview
+
+-- list of tasks for downloading coubs
+/api/tasks
+/api/tasks/{id}
+/api/tasks/{id}/start
+
+-- list of coubs
+/api/coubs
+/api/coubs/{id}
