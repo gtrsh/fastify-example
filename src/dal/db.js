@@ -1,10 +1,19 @@
-import knex from 'knex'
+import Knex from 'knex'
 
-const db = knex({
+const { pathname } = new URL('./migrations', import.meta.url)
+const config = {
   client: 'pg',
-  connection: process.env.PG_DB
-})
+  connection: process.env.PG_DB,
+  migrations: {
+    tableName: 'knex_migrations',
+    directory: pathname,
+    loadExtensions: ['.js']
+  }
+}
+
+const db = Knex(config)
 
 export {
-  db
+  db,
+  config as default
 }
