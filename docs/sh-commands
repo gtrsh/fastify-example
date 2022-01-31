@@ -4,3 +4,6 @@ sudo -u postgres createdb coub-service-db -O coub
 
 # Parse .env file and start service
 node --experimental-specifier-resolution=node -r dotenv/config src/index.js
+
+# Knex migrations
+node --experimental-specifier-resolution=node -r dotenv/config ./node_modules/.bin/knex --esm --knexfile src/dal/db.js [ops]
