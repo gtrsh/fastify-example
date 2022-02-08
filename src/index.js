@@ -1,13 +1,20 @@
 import rb from 'rubico'
 import { db } from './dal'
+import { logger } from './logger'
 
-const insert = (data) => db('coubs').insert(data)
+const insertOp = (data) => db('coubs').insert(data)
 const insertCoubData = rb.tryCatch(
-  insert,
-  (error) => (error)
+  insertOp,
+  (error) => {
+    logger.error(`insert error: ${error.message}`)
+    return error
+  }
 )
 
-const errVal = await insertCoubData({ data: "test"})
-console.log(errVal.message)
-
+const errVal = await insertCoubData({ data: "test" })
 process.exit(0)
+
+process.on('uncaughtException', err => {
+  logger.error(`Uncaught Exception: ${err.message}`)
+  process.exit(1)
+})
