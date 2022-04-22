@@ -1,3 +1,5 @@
+import { request } from 'undici'
+import { createWriteStream } from 'node:fs'
 import { getMetaData } from './metadata'
 
 const data = await getMetaData('https://coub.com/view/2nmqv5')
@@ -11,5 +13,8 @@ console.log(videoSize)
 console.log('==========')
 console.log(audioUrl)
 console.log(audioSize)
+
+const { statusCode, body: bodyStream } = await request(videoUrl)
+bodyStream.pipe(createWriteStream('test.mp4'))
 
 import { client } from './dal'
