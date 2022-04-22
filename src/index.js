@@ -11,20 +11,10 @@ const { url: audioUrl, filesize: audioSize } = requested_formats.find((i) => i.a
 const { statusCodeVid, body: bodyStreamVid } = await request(videoUrl)
 const { statusCodeAud, body: bodyStreamAud } = await request(audioUrl)
 
-import { client } from './dal'
+import { uploadFile } from './dal'
 
-client.putObject('coub-bucket', getFileName(videoUrl), bodyStreamVid, videoSize, (err, objInfo) => {
-  if(err) {
-    return console.log(err) // err should be null
-  }
-  console.log("upload complete")
-  console.log(objInfo)
-})
+const objResVid = await uploadFile('coub-bucket', getFileName(videoUrl), bodyStreamVid, videoSize)
+const objResAud = await uploadFile('coub-bucket', getFileName(audioUrl), bodyStreamAud, audioSize)
 
-client.putObject('coub-bucket', getFileName(audioUrl), bodyStreamAud, audioSize, (err, objInfo) => {
-  if(err) {
-    return console.log(err) // err should be null
-  }
-  console.log("upload complete")
-  console.log(objInfo)
-})
+console.log(objResVid)
+console.log(objResAud)
